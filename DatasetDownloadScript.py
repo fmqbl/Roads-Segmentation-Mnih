@@ -13,7 +13,7 @@ import os
 import pdb
 import time
 
-
+#Static path from my machine, you can adjust as per your machine
 download_folder = "D:\\MasterDataScience\\Deep Learning\\Project\\dataset\\Testing\\testingOutput"
 
 profile = {"plugins.plugins_list": [{"enabled": False,
@@ -24,7 +24,7 @@ profile = {"plugins.plugins_list": [{"enabled": False,
 class downloader:
     
     def __init__(self):
-        
+        #logging information setup
         self.logger = logging.getLogger('MNihDataset Download LOG')
         self.logger.setLevel(logging.DEBUG)
         
@@ -54,7 +54,7 @@ class downloader:
         self.settings.add_argument('--browser.download.folderList=2')
         self.settings.add_argument('--browser.helperApps.neverAsk.saveToDisk=text/csv')
         self.settings.add_experimental_option("prefs",profile)
-            
+        #Preferences to be set before.
         
     def loadBrowser(self):
         
@@ -63,6 +63,7 @@ class downloader:
 
         try:
             #self.browser = webdriver.Chrome("D:\\DataScrapping\\ProjectBigSchedules\\chromedriver.exe")
+            #Chrome driver should be downloaded as per the chrome version you are using from https://chromedriver.chromium.org/downloads
             self.browser = webdriver.Chrome(chrome_options=self.settings, executable_path=r"D:\chromedriver.exe")
             self.browser.maximize_window()
 
@@ -77,6 +78,7 @@ class downloader:
         self.downloadImages()
 
     def downloadImages(self):
+        #Goes to path, downloaded each images iteratively
         elems = self.browser.find_elements_by_xpath("//a[@href]")
         counter = 1
         for elem in elems:
